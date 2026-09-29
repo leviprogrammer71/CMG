@@ -3,101 +3,304 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CMG Test Intake — Native GHL Form</title>
+<title>Centered Marketing Group — Test Intake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1115;
-    --card: #171a21;
-    --border: #2a2e38;
-    --text: #eef0f3;
-    --muted: #9aa1ad;
+    --ink: #1c2019;
+    --ink-soft: #262b22;
+    --paper: #f6f2e8;
+    --paper-dim: #ece5d4;
+    --wheat: #c9a227;
+    --clay: #a2492e;
+    --sage: #5b6b4f;
+    --line: rgba(28,32,25,0.14);
+    --line-on-ink: rgba(246,242,232,0.16);
   }
   * { box-sizing: border-box; }
-  body {
+  html, body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    min-height: 100%;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  h1, h2, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .shell {
+    display: grid;
+    grid-template-columns: 1fr;
     min-height: 100vh;
+  }
+  @media (min-width: 960px) {
+    .shell { grid-template-columns: 44% 56%; }
+  }
+
+  /* ---------- Left: brand panel ---------- */
+  .brand {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(246,242,232,0.05) 1px, transparent 1px);
+    background-size: 18px 18px;
   }
-  .wrap { width: 100%; max-width: 560px; }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
+  .mark {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 999px;
-    margin-bottom: 16px;
+    color: var(--wheat);
   }
-  h1 { font-size: 22px; margin: 0 0 6px; }
-  p.sub { color: var(--muted); margin: 0 0 24px; font-size: 14px; line-height: 1.5; }
-  .frame-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 12px;
-    height: 1100px;
+  .brand h1 {
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.08;
+    margin: 28px 0 18px;
+    max-width: 11ch;
   }
-  .footer-note {
-    margin-top: 18px;
-    font-size: 12px;
-    color: var(--muted);
+  .brand p.lede {
+    color: rgba(246,242,232,0.72);
+    font-size: 15.5px;
     line-height: 1.6;
+    max-width: 34ch;
+    margin: 0;
+  }
+  .photo-stack {
+    position: relative;
+    height: 300px;
+    margin: 40px 0;
+  }
+  .photo-slot {
+    position: absolute;
+    border-radius: 3px;
+    border: 1px solid var(--line-on-ink);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.92) contrast(1.04);
+  }
+  .photo-slot.a { width: 62%; height: 230px; left: 0; top: 0; transform: rotate(-2deg); z-index: 2; box-shadow: 0 18px 34px rgba(0,0,0,0.35); }
+  .photo-slot.b { width: 46%; height: 190px; right: 0; bottom: 0; transform: rotate(3deg); z-index: 1; box-shadow: 0 14px 26px rgba(0,0,0,0.3); }
+
+  .brand-foot {
+    display: flex;
+    gap: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-on-ink);
+    font-size: 13px;
+    color: rgba(246,242,232,0.55);
+  }
+  .brand-foot strong { color: var(--paper); font-weight: 500; }
+
+  /* ---------- Right: form panel ---------- */
+  .panel {
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .panel-head h2 {
+    font-size: 26px;
+    margin: 0 0 8px;
+  }
+  .panel-head p {
+    color: #5c5c50;
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0 0 32px;
+    max-width: 48ch;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #857f6d;
+    padding: 0 0 14px;
+    position: relative;
+  }
+  .tab.active { color: var(--ink); }
+  .tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 2px;
+    background: var(--clay);
+  }
+  .tab .tag {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 400;
+    color: #a29c88;
+    margin-top: 2px;
+  }
+  .tab.active .tag { color: var(--sage); }
+
+  .frame-wrap {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    flex: 1;
+    min-height: 900px;
+    position: relative;
+  }
+  .frame-pane {
+    position: absolute;
+    inset: 0;
+    display: none;
+  }
+  .frame-pane.active { display: block; }
+  .frame-pane iframe { width: 100%; height: 100%; border: none; }
+
+  .note {
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: #857f6d;
+    line-height: 1.6;
+  }
+  .note code {
+    background: var(--paper-dim);
+    padding: 1px 5px;
+    border-radius: 3px;
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <span class="badge">Native GHL Form — CMG | Start a Conversation</span>
-  <h1>Test Inquiry Form (native embed)</h1>
-  <p class="sub">
-    This is your actual GHL-built form, embedded here for testing. A submission
-    should fire the "Form Submitted" trigger filtered to "CMG | Start a
-    Conversation," and any custom fields configured inside the form builder
-    (like service interest) should map directly — no external-tracking
-    guesswork involved.
-  </p>
+<div class="shell">
 
-  <div class="frame-card">
-    <iframe
-        src="https://api.leadconnectorhq.com/widget/form/XuRoJu5proNBUVPIJP7H"
-        style="width:100%;height:100%;border:none;border-radius:8px"
-        id="inline-XuRoJu5proNBUVPIJP7H"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="CMG | Start a Conversation"
-        data-height="1087"
-        data-layout-iframe-id="inline-XuRoJu5proNBUVPIJP7H"
-        data-form-id="XuRoJu5proNBUVPIJP7H"
-        data-cookie-consent="true"
-        data-cookie-consent-provider="auto"
-        title="CMG | Start a Conversation"
-    ></iframe>
-  </div>
+  <!-- Left: brand panel -->
+  <aside class="brand">
+    <div>
+      <div class="mark">Centered Marketing Group</div>
+      <h1>Built by people who work the land, not just the pitch deck.</h1>
+      <p class="lede">
+        Test intake environment — used to verify form-to-pipeline automation
+        before it touches a real client conversation.
+      </p>
+    </div>
 
-  <div class="footer-note">
-    Checklist before trusting a test result here:<br />
-    1. Workflow trigger is "Form Submitted" → "CMG | Start a Conversation" (not External Tracking Event).<br />
-    2. The service-interest question inside this form's builder is mapped to
-    the <code>service_interest</code> custom field, not left as an unmapped
-    question.<br />
-    3. Submit with a brand-new email each test — reused test contacts can
-    carry stale field values.
-  </div>
+    <div class="photo-stack">
+      <div class="photo-slot a"><img src="https://i.pinimg.com/736x/3b/21/8a/3b218a78a6ce6fa048290e9f2de856f2.jpg" alt="" referrerpolicy="no-referrer"></div>
+      <div class="photo-slot b"><img src="https://i.pinimg.com/736x/96/a8/e5/96a8e5ccdca9fd9c7250e1adc218cbd7.jpg" alt="" referrerpolicy="no-referrer"></div>
+    </div>
+
+    <div class="brand-foot">
+      <div><strong>Sandbox</strong><br>Not client-facing</div>
+      <div><strong>Two forms</strong><br>Switch to test either flow</div>
+    </div>
+  </aside>
+
+  <!-- Right: form panel -->
+  <main class="panel">
+    <div class="panel-head">
+      <h2>Submit a test entry</h2>
+      <p>Choose which live GHL form to test, then submit. Check the corresponding
+        contact and workflow enrollment in GHL right after.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-target="pane-start" type="button">
+        Start a Conversation
+        <span class="tag">New lead intake</span>
+      </button>
+      <button class="tab" data-target="pane-onboarding" type="button">
+        Client Onboarding
+        <span class="tag">Post-Won handoff</span>
+      </button>
+    </div>
+
+    <div class="frame-wrap">
+      <div class="frame-pane active" id="pane-start">
+        <iframe
+            src="https://api.leadconnectorhq.com/widget/form/197Zq1mFywECK5ylTrpC"
+            id="inline-197Zq1mFywECK5ylTrpC"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="CMG | Start a Conversation|embedded"
+            data-height="1087"
+            data-layout-iframe-id="inline-197Zq1mFywECK5ylTrpC"
+            data-form-id="197Zq1mFywECK5ylTrpC"
+            data-cookie-consent="true"
+            data-cookie-consent-provider="auto"
+            title="CMG | Start a Conversation|embedded">
+        </iframe>
+      </div>
+
+      <div class="frame-pane" id="pane-onboarding">
+        <iframe
+            src="https://api.leadconnectorhq.com/widget/form/uI1iZXfTmLX5RPBSpU26"
+            id="inline-uI1iZXfTmLX5RPBSpU26"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="CMG | Client Onboarding - embeded"
+            data-height="1107"
+            data-layout-iframe-id="inline-uI1iZXfTmLX5RPBSpU26"
+            data-form-id="uI1iZXfTmLX5RPBSpU26"
+            data-cookie-consent="true"
+            data-cookie-consent-provider="auto"
+            title="CMG | Client Onboarding - embeded">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="note">
+      If a form doesn't render here, open it directly in a new tab first —
+      <code>https://api.leadconnectorhq.com/widget/form/&lt;form-id&gt;</code> —
+      to rule out a hosting/framing issue before assuming the form itself is broken.
+      This page must be served over <code>https://</code> (Netlify Drop, GitHub
+      Pages, or your real site) — opening it locally as a file can block the
+      embedded forms from loading.
+    </div>
+  </main>
+
 </div>
 
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+<script>
+  document.querySelectorAll('.tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.frame-pane').forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+</script>
 </body>
 </html>
