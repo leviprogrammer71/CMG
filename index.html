@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CMG Test Intake — GHL Tracking Sandbox</title>
+<title>CMG Test Intake — Native GHL Form</title>
 <style>
   :root {
     --bg: #0f1115;
@@ -11,9 +11,6 @@
     --border: #2a2e38;
     --text: #eef0f3;
     --muted: #9aa1ad;
-    --accent: #4f7cff;
-    --accent-hover: #3d68e8;
-    --success: #2fbf71;
   }
   * { box-sizing: border-box; }
   body {
@@ -27,7 +24,7 @@
     justify-content: center;
     padding: 24px;
   }
-  .wrap { width: 100%; max-width: 520px; }
+  .wrap { width: 100%; max-width: 560px; }
   .badge {
     display: inline-block;
     font-size: 12px;
@@ -41,133 +38,66 @@
   }
   h1 { font-size: 22px; margin: 0 0 6px; }
   p.sub { color: var(--muted); margin: 0 0 24px; font-size: 14px; line-height: 1.5; }
-  .card {
+  .frame-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 24px;
+    padding: 12px;
+    height: 1100px;
   }
-  label {
-    display: block;
-    font-size: 13px;
-    color: var(--muted);
-    margin: 16px 0 6px;
-  }
-  label:first-of-type { margin-top: 0; }
-  input, select {
-    width: 100%;
-    background: #0f1115;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 11px 12px;
-    border-radius: 8px;
-    font-size: 15px;
-  }
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-  button {
-    margin-top: 22px;
-    width: 100%;
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 13px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  button:hover { background: var(--accent-hover); }
-  .status {
-    margin-top: 16px;
-    font-size: 13px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    display: none;
-  }
-  .status.show { display: block; }
-  .status.ok { background: rgba(47,191,113,0.12); color: var(--success); border: 1px solid rgba(47,191,113,0.35); }
   .footer-note {
     margin-top: 18px;
     font-size: 12px;
     color: var(--muted);
     line-height: 1.6;
   }
-  .footer-note code {
-    background: #0f1115;
-    padding: 1px 5px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <span class="badge">GHL Tracking Sandbox — Not a Real CMG Page</span>
-  <h1>Test Inquiry Form</h1>
+  <span class="badge">Native GHL Form — CMG | Start a Conversation</span>
+  <h1>Test Inquiry Form (native embed)</h1>
   <p class="sub">
-    Submitting this form should create/update a contact in GHL and fire the
-    "External Tracking Event → Form Submitted" trigger, the same way a real
-    website inquiry would. Use this to test workflows end to end.
+    This is your actual GHL-built form, embedded here for testing. A submission
+    should fire the "Form Submitted" trigger filtered to "CMG | Start a
+    Conversation," and any custom fields configured inside the form builder
+    (like service interest) should map directly — no external-tracking
+    guesswork involved.
   </p>
 
-  <div class="card">
-    <form id="testForm" name="CMG Test Inquiry Form">
-      <label for="name">Full name</label>
-      <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+  <div class="frame-card">
+    <iframe
+        src="https://api.leadconnectorhq.com/widget/form/XuRoJu5proNBUVPIJP7H"
+        style="width:100%;height:100%;border:none;border-radius:8px"
+        id="inline-XuRoJu5proNBUVPIJP7H"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="CMG | Start a Conversation"
+        data-height="1087"
+        data-layout-iframe-id="inline-XuRoJu5proNBUVPIJP7H"
+        data-form-id="XuRoJu5proNBUVPIJP7H"
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        title="CMG | Start a Conversation"
+    ></iframe>
+  </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="jane@example.com" required />
-
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
-
-      <label for="company">Business name</label>
-      <input type="text" id="company" name="company" placeholder="Their company" />
-
-      <label for="service_interest">Service interest</label>
-      <select id="service_interest" name="service_interest">
-        <option value="Photography">Photography</option>
-        <option value="Videography">Videography</option>
-        <option value="Social Media">Social Media</option>
-        <option value="Web / Branding">Web / Branding</option>
-        <option value="Not sure yet">Not sure yet</option>
-      </select>
-
-      <button type="submit">Submit test inquiry</button>
-
-      <div class="status ok" id="statusBox">
-        ✓ Form submitted. Check GHL Contacts / your workflow's Enrollment history
-        in a few seconds to confirm it landed.
-      </div>
-    </form>
-
-    <div class="footer-note">
-      Field <code>name</code> attributes (<code>name</code>, <code>email</code>,
-      <code>phone</code>, <code>company</code>) are the ones GHL auto-maps to
-      contact fields. <code>service_interest</code> will map to a matching
-      custom field if one exists with that name in your GHL account — create
-      it under Settings → Custom Fields if it isn't matching.
-    </div>
+  <div class="footer-note">
+    Checklist before trusting a test result here:<br />
+    1. Workflow trigger is "Form Submitted" → "CMG | Start a Conversation" (not External Tracking Event).<br />
+    2. The service-interest question inside this form's builder is mapped to
+    the <code>service_interest</code> custom field, not left as an unmapped
+    question.<br />
+    3. Submit with a brand-new email each test — reused test contacts can
+    carry stale field values.
   </div>
 </div>
 
-<script>
-  // Local-only UX: shows a confirmation message after submit.
-  // This does NOT interfere with the GHL tracking script below —
-  // that script listens for the same native form submit independently.
-  document.getElementById('testForm').addEventListener('submit', function () {
-    var box = document.getElementById('statusBox');
-    box.classList.add('show');
-  });
-</script>
-
-<!-- GHL External Tracking script -->
-<script
-  src="https://link.msgsndr.com/js/external-tracking.js"
-  data-tracking-id="tk_a5fb49e4a6af46dcba72ffa69057ecaf">
-</script>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body>
 </html>
